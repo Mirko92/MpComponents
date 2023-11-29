@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, ElementRef, Input, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 
 export interface MpCardData {
   imgUrl      : string;
@@ -23,6 +23,9 @@ export class CardCarouselComponent implements AfterViewInit {
 
   @ViewChild('carousel')
   carousel?: ElementRef<HTMLDivElement>;
+
+  @ContentChild('customTemplate')
+  customTemplate?: TemplateRef<any>;
 
   private _index: number = 0; 
 

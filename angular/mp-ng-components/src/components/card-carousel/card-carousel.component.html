@@ -21,12 +21,19 @@
       </section>
 
       <section class="mp__card__body">
-        <div>
-          <h1>{{currentItemTitle}}</h1>
-          <h5>
-            {{currentItemDescription}}
-          </h5>
-        </div>
+        @if (!customTemplate) {
+          <div>
+            <h1>{{currentItemTitle}}</h1>
+            <h5>
+              {{currentItemDescription}}
+            </h5>
+          </div>
+        } @else {
+          <ng-template 
+            [ngTemplateOutlet]="customTemplate"
+            [ngTemplateOutletContext]="{ $implicit: this.items?.[this.index] }"
+          ></ng-template>
+        }
 
         <div class="mp_carousel_container">
           <div
