@@ -1,0 +1,48 @@
+<div class="mp__container">
+  <div
+    class="mp__bg_wrapper"
+    [style.background-image]="currentBgUrl"
+  >
+    <div class="mp__card">
+      <section
+        class="mp__card__img"
+        [style.background-image]="currentBgUrl"
+      >
+        <div class="mp__card__actions">
+          <button (click)="previous()">&lt;</button>
+          <button (click)="next()">&gt;</button>
+
+          <div class="spacer" ></div>
+
+          <span class="index">
+            {{(index + 1).toString().padStart(2, "0")}}
+          </span>
+        </div>
+      </section>
+
+      <section class="mp__card__body">
+        <div>TODO</div>
+
+        <div class="mp_carousel_container">
+          <div
+            #carousel
+            [style.transform]="carouselPosition"
+            class="mp_carousel"
+          >
+            <!-- <div *ngFor="let item of items.slice(1); let i = index" #itemElement>
+              <img  [src]="item.imgUrl" 
+              (click)="goTo( index + 1 )" />
+            </div> -->
+
+            @for (item of items.slice(1); track item.imgUrl) {
+              <div #imgComponent>
+                <img  [src]="item.imgUrl" 
+                      (click)="goTo( $index + 1 )" />
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

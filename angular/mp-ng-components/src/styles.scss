@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../../../style/components/MpCardCarousel.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.two-columns {
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: min(800px, 100vh);
+
+  // >div {
+  //   display: flex;
+  //   width: 100%;
+  // }
+}
