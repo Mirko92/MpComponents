@@ -55,6 +55,14 @@ export class CardCarouselComponent implements AfterViewInit {
     return `translateX(-${this.getScrollWidth() * this.index}px)`
   }
 
+  get currentItemTitle() {
+    return this.items?.[this.index].title;
+  }
+
+  get currentItemDescription() {
+    return this.items?.[this.index].description;
+  }
+
   ngAfterViewInit(): void {
     console.log(this.itemComponents);
     if (this.itemComponents?.first.nativeElement && this.carousel?.nativeElement) {
