@@ -1,0 +1,20 @@
+@import "../../../style/components/MpCardCarousel.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+.two-columns {
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: min(800px, 100vh);
+}
+
+.my-slot:not(:empty) + .my-slot-fallback{
+  display: none;
+}
