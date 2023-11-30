@@ -155,13 +155,14 @@ $card-padding: 2rem;
 
 
 .mp_carousel_container {
-  height: min(300px, 40%);
+  height: min(310px, 40%);
   width: 120%;
   overflow: hidden;
   
   position: absolute;
   bottom: 5rem;
   right: 0;
+  padding-block: 5px;
 
   
   @container (max-width: 768px) {
@@ -181,9 +182,15 @@ $card-padding: 2rem;
       border-radius: 20px;
       object-fit: cover;
       cursor: pointer;
-      transition: filter  0.3s ease;
+      filter: grayscale(.6);
       &:hover {
-        filter: grayscale(50%);
+        filter: grayscale(0%);
+        border: 5px solid white;
+        outline: 1px solid black;
+      }
+
+      &:active {
+        transform: scale(.97);
       }
     }
   }
