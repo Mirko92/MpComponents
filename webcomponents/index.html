@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mp Components — web components</title>
+    <script src="MpCardCarousel.js" defer></script>
+    <script src="MpUseTemplate.js" defer></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .two-columns {
+        display: flex;
+        flex-flow: row nowrap;
+        min-height: min(800px, 100vh);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="two-columns">
+      <template id="custom-template">
+        <h1 mp-data="title">{title}</h1>
+        <slot name="prova" mp-data="title">{title}</slot>
+      </template>
+      <mp-card-carousel test-carousel use-template="custom-template">
+        <!-- <div slot="item">
+          <h1 mp-data="title">Image title: {title}</h1>
+          <h3 mp-data="description">{description}</h3>
+        </div> -->
+      </mp-card-carousel>
+    </div>
+    <div class="two-columns">
+      <mp-card-carousel test-carousel></mp-card-carousel>
+      <mp-card-carousel test-carousel></mp-card-carousel>
+    </div>
+    <div class="two-columns">
+      <mp-card-carousel test-carousel></mp-card-carousel>
+      <mp-card-carousel test-carousel></mp-card-carousel>
+      <mp-card-carousel test-carousel></mp-card-carousel>
+    </div>
+
+    <script>
+      const items = [
+        { imgUrl: "../assets/matrix.webp",         title: 'Matrix',          description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.' },
+        { imgUrl: "../assets/existence_pain.png",  title: 'Existence Pain',  description: 'Dignissimos dolor repellat consequuntur delectus rem quod, magnam eos earum vel temporibus odit.' },
+        { imgUrl: "../assets/night.jpg",           title: 'Night',           description: 'Quasi esse doloribus iusto repellendus maxime dignissimos neque ut.' },
+        { imgUrl: "../assets/prova.png",           title: 'Prova',           description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit' },
+        { imgUrl: "../assets/img1.jpg",            title: 'Img1',            description: 'Quasi esse doloribus iusto repellendus maxime dignissimos neque ut' },
+        { imgUrl: "../assets/img2.png",            title: 'Img2',            description: 'Dignissimos dolor repellat consequuntur delectus rem quod, magnam eos earum vel temporibus odit.' },
+        { imgUrl: "../assets/img3.png",            title: 'Img3',            description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit' },
+        { imgUrl: "../assets/r_m_dinner.jpg",      title: 'Rick e Morty',    description: 'Quasi esse doloribus iusto repellendus maxime dignissimos neque ut' }
+      ];
+      const carouselEls = document.querySelectorAll('[test-carousel]');
+
+      carouselEls.forEach(x => x.setAttribute('items', JSON.stringify(items)));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+.mp__container {
+  container-type: size;
+  width: 100%;
+}
+.mp__bg_wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transition: background-image 0.5s ease;
+  display: grid;
+  place-items: center;
+  padding: 5rem;
+}
+@container (max-width: 768px) {
+  .mp__bg_wrapper {
+    padding: 2rem;
+  }
+}
+.mp__bg_wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  backdrop-filter: blur(10px);
+}
+.mp__card {
+  z-index: 1;
+  position: relative;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-flow: row nowrap;
+}
+.mp__card__img, .mp__card__body {
+  flex: 1 0 50%;
+}
+.mp__card__img {
+  position: relative;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transition: background-image 0.5s ease;
+}
+.mp__card__body {
+  position: relative;
+  padding: 2rem;
+}
+@container (max-width: 768px) {
+  .mp__card__img {
+    border-radius: 20px;
+  }
+  .mp__card__body {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+  }
+}
+@container (max-width: 360px) {
+  .mp__card__body {
+    width: 90%;
+    top: 1rem;
+    transform: translate(-50%, 0);
+  }
+}
+.mp__card__actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+.mp__card__actions button {
+  border: 2px solid white;
+  border-radius: 100%;
+  margin-inline: 0.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.mp__card__actions button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.mp__card__actions button:active {
+  background-color: rgba(255, 255, 255, 0.55);
+  transform: scale(0.9);
+}
+.mp__card__actions .spacer {
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+  margin-inline: 2rem;
+}
+.mp__card__actions .index {
+  font-size: 1.5rem;
+}
+
+.mp_carousel_container {
+  height: min(310px, 40%);
+  width: 120%;
+  overflow: hidden;
+  position: absolute;
+  bottom: 5rem;
+  right: 0;
+  padding-block: 5px;
+}
+@container (max-width: 768px) {
+  .mp_carousel_container {
+    height: 150px;
+    bottom: -200px;
+    width: 100%;
+  }
+}
+.mp_carousel_container .mp_carousel {
+  display: flex;
+  gap: 1rem;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+.mp_carousel_container .mp_carousel img {
+  height: 100%;
+  width: 200px;
+  border-radius: 20px;
+  object-fit: cover;
+  cursor: pointer;
+  filter: grayscale(0.6);
+}
+.mp_carousel_container .mp_carousel img:hover {
+  filter: grayscale(0%);
+  border: 5px solid white;
+  outline: 1px solid black;
+}
+.mp_carousel_container .mp_carousel img:active {
+  transform: scale(0.97);
+}
