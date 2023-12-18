@@ -1,0 +1,93 @@
+
+$timing-function: ease-in-out;
+
+@keyframes flipHorizontally {
+  0% {
+    transform: rotateY(0deg);
+    pointer-events: none;
+  }
+  
+  100% {
+    pointer-events: inherit;
+    transform: rotateY(-180deg);
+  }
+}
+
+@keyframes flipHorizontally2 {
+  0% {
+    transform: rotateY(-180deg);
+  }
+  
+  100% {
+    transform: rotateY(-360deg);
+  }
+}
+
+
+.mp {
+  &_flip_card {
+    $this: &; 
+    display: contents;
+
+    &__layer {
+      display: inline-block;
+      position: relative;
+
+      min-height: 10rem;
+      min-width: 10rem;
+
+      perspective: 1000px;
+      transform-style: preserve-3d;
+
+      cursor: pointer;
+
+      &__front, 
+      &__back {
+        backface-visibility: hidden;
+        user-select: none;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      &__front {
+      }
+
+      &__back {
+      }
+    }
+
+    &__controller {
+      + #{$this}__layer{
+        #{$this}__layer__front {
+          animation: flipHorizontally2 1s 1 $timing-function;
+          animation-fill-mode: forwards;
+        }
+
+        #{$this}__layer__back {
+          animation: flipHorizontally 1s 1 $timing-function;
+          animation-fill-mode: forwards;
+        }
+      }
+     
+    }
+
+    &__controller:checked {
+      + #{$this}__layer {
+        #{$this}__layer__front {
+          animation: flipHorizontally 1s 1 $timing-function;
+          animation-fill-mode: forwards;
+        }
+
+        #{$this}__layer__back {
+          animation: flipHorizontally2 1s 1 $timing-function;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+
+  }
+}
