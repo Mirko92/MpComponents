@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.scss'
 import { MpCardCarousel, MpCardData } from './components/MpCardCarousel';
 import { MpFlipCard } from './components/MpHoverCard';
@@ -24,34 +25,93 @@ const imgs: MpCardData[] = [
 ];
 
 function App() {
+
+  const [flipCardType, setFlipCardType] = useState<'radio'|'checkbox'>("checkbox");
+  const [flipCardDir, setDirection] = useState<'vertical'|undefined>();
+
   return (
     <>
       <header>
         <h1>Test page</h1>
       </header>
 
-      <section className='grid-sample'>
-        {
-          imgs.map((x,i) => {
-            return (
-              <MpFlipCard 
-                key={`MpHoverCard${i}`}
-                type='radio'
-                name='something'
-              >
-                <MpFlipCard.Front>
-                  <div style={{background: `url(${x.imgUrl})`, height: "100%", backgroundSize: 'cover', backgroundPosition: 'center'}}>
-                  </div>
-                </MpFlipCard.Front>
+      <section>
+        <header className='d-flex gap1 mb1'>
 
-                <MpFlipCard.Back>
-                  <h2>Testo nel retro</h2>
-                  <h5>Altro testo un po' più lungo del precedente</h5>
-                </MpFlipCard.Back>
-              </MpFlipCard>
-            );
-          })
-        }
+          <fieldset>
+            <legend>Selection type</legend>
+            <label htmlFor="flip-card-type-radio">
+              <input 
+                id='flip-card-type-radio'
+                type="radio" 
+                name='flip-card-type'
+                onChange={() => setFlipCardType('radio')}
+                checked={flipCardType === 'radio'}
+              />
+              Radio
+            </label>
+            <label htmlFor="flip-card-type-check">
+              <input 
+                id='flip-card-type-check'
+                type="radio" 
+                name='flip-card-type'
+                onChange={() => setFlipCardType('checkbox')}
+                checked={flipCardType === 'checkbox'}
+              />
+              Checkbox
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Direction</legend>
+            <label htmlFor="flip-card-dir-horiz">
+              <input 
+                id='flip-card-dir-horiz'
+                type="radio" 
+                name='flip-card-dir'
+                onChange={() => setDirection(undefined)}
+                checked={flipCardDir === undefined}
+              />
+              Horizontally
+            </label>
+            <label htmlFor="flip-card-dir-vert">
+              <input 
+                id='flip-card-dir-vert'
+                type="radio" 
+                name='flip-card-dir'
+                onChange={() => setDirection('vertical')}
+                checked={flipCardDir === 'vertical'}
+              />
+              Vertically
+            </label>
+          </fieldset>
+
+        </header>
+
+        <div className='grid-sample'>
+          {
+            imgs.map((x,i) => {
+              return (
+                <MpFlipCard 
+                  key={`MpHoverCard${i}`}
+                  type={flipCardType}
+                  name='something'
+                  direction={flipCardDir}
+                >
+                  <MpFlipCard.Front>
+                    <div style={{background: `url(${x.imgUrl})`, height: "100%", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                    </div>
+                  </MpFlipCard.Front>
+
+                  <MpFlipCard.Back>
+                    <h2>Testo nel retro</h2>
+                    <h5>Altro testo un po' più lungo del precedente</h5>
+                  </MpFlipCard.Back>
+                </MpFlipCard>
+              );
+            })
+          }
+        </div>
       </section>
 
       <section>

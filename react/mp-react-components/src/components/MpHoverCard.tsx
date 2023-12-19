@@ -16,13 +16,15 @@ interface MpFlipCardProps {
   id?: string; 
   type?: 'checkbox'|'radio';
   name?: string;
+  direction?: string;
 }
 
 export function MpFlipCard({ 
   children, 
   id, 
   type = 'checkbox',
-  name
+  name,
+  direction
 }: PropsWithChildren<MpFlipCardProps>) {
 
 
@@ -48,7 +50,12 @@ export function MpFlipCard({
 
 
   return (
-    <div className="mp_flip_card">
+    <div 
+      className={`
+        mp_flip_card 
+        ${direction === 'vertical' ? 'mp-vertical': ''}
+      `}
+    >
       <input
         type={type}
         name={name}
