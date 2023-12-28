@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './App.scss'
 import { MpCardCarousel, MpCardData } from './components/MpCardCarousel';
-import { MpFlipCard } from './components/MpHoverCard';
+import { MpFlipCardDir, MpFlipCardType, MpFlipCard } from './components/MpFlipCard';
 
 const twoColumnsStyle: React.CSSProperties = {
-  display: 'flex',
-  flexFlow: 'row nowrap',
+  display  : 'flex',
+  flexFlow : 'row nowrap',
   minHeight: "800px"
 }
 
@@ -24,16 +24,20 @@ const imgs: MpCardData[] = [
   { imgUrl: "/black-hole-mountains.jpg",title: 'Black Hole Mountains',    description: 'Quasi esse doloribus iusto repellendus maxime dignissimos neque ut' }
 ];
 
+
 function App() {
 
-  const [flipCardType, setFlipCardType] = useState<'radio'|'checkbox'>("checkbox");
-  const [flipCardDir, setDirection] = useState<'vertical'|undefined>();
+  const [flipCardType, setFlipCardType] = useState<MpFlipCardType>("checkbox");
+  const [flipCardDir, setDirection] = useState<MpFlipCardDir>();
 
   return (
     <>
       <header>
         <h1>Test page</h1>
       </header>
+
+      <section>
+      </section>
 
       <section>
         <header className='d-flex gap1 mb1'>

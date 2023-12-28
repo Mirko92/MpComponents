@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode, useMemo, useRef, useState } from "react";
+import { PropsWithChildren, ReactNode, useMemo, useRef } from "react";
 
 function generateSimpleInputId() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -10,14 +10,48 @@ function generateSimpleInputId() {
   return inputId;
 }
 
-//TODO: Fare in modo che se di tipo radio, diventi obbligatorio anche il name
+export type MpFlipCardType = 'radio'    | 'checkbox';
+export type MpFlipCardDir  = 'vertical' | undefined;
 
-interface MpFlipCardProps {
-  id?: string; 
-  type?: 'checkbox'|'radio';
+type MpFlipCardBase = {
+  /**
+   * If not provided it will be generated
+   * It links the \<label for="{id}"\> element to the \<input id="{id}"\> element
+   */
+  id?: string;
+
+  /**
+   * It define the transition direction
+   * - vertical
+   * - undefined => horizontal (TODO: non usare undef)
+   */
+  direction?: MpFlipCardDir;
+
+  /**
+   * Specifies the type of FlipCard. 
+   * Choose between 'radio' for single selection (requires 'name' property) 
+   * or 'checkbox' for multiple selection. 
+   */
+  type: MpFlipCardType;
+
+  /**
+   * Specifies the name of the form element
+   * [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name)
+   */
   name?: string;
-  direction?: string;
 }
+
+type MpFlipCardRadioVariant = {
+  type: Extract<MpFlipCardType, 'radio'>;
+  name: string;
+} & MpFlipCardBase;
+
+type MpFlipCardCheckboxVariant = {
+  type: Extract<MpFlipCardType, 'checkbox'>;
+  name?: string;
+} & MpFlipCardBase;
+
+type MpFlipCardProps = MpFlipCardCheckboxVariant | MpFlipCardRadioVariant;
 
 export function MpFlipCard({ 
   children, 
@@ -37,13 +71,13 @@ export function MpFlipCard({
 
   if (!front.current || !back.current) {
     if (!Array.isArray(children) || children.length !== 2) {
-      throw "Two children elements required for MpHoverCard to works correctly.";
+      throw "Two children elements required for MpFlipCard to works correctly.";
     } else {
       front.current = children.filter( x => x.type === MpFlipCard.Front );
       back.current  = children.filter( x => x.type === MpFlipCard.Back );
   
       if (!front.current || !back.current) {
-        throw "Provide both MpHoverCard.Back and MpHoverCard.Front slots";
+        throw "Provide both MpFlipCard.Back and MpFlipCard.Front slots";
       }
     }
   }
